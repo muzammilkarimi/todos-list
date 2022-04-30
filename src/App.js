@@ -2,14 +2,15 @@ import logo from './logo.svg';
 import './App.css';
 import Header from './mycomponents/header.js'
 import Todos from './mycomponents/todos.js'
+import Addtodo from './mycomponents/addtodo.js'
 import Footer from './mycomponents/footer.js'
 import React, { useState } from 'react';
 
 function App() {
-  const ondelete = (todos)=>{
-    console.log("i am ondelete",todos);
+  const ondelete = (comingtodo)=>{
+    console.log("i am ondelete",comingtodo);
     setTodo(todo.filter((e)=>{
-      return e!==todos;
+      return e!==comingtodo;
     }));
   }
 
@@ -35,6 +36,7 @@ function App() {
   return (
     <>
       <Header title="My todos List" />
+      <Addtodo/>
       <Todos todos={todo} ondelete={ondelete}/>
       <Footer />
     </>
