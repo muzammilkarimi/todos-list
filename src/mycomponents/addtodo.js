@@ -42,7 +42,7 @@ export default function AddTodo({ addTodo }) {
                         className="form-control" id="desc" />
                 </div>
 
-                <button type="submit" className="btn btn-primary">
+                <button type="submit" className="btn btn-primary" style={{background:"#FF914D",border:"none",color:"black"}}>
                     Add Todo
                 </button>
             </form>

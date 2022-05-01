@@ -4,8 +4,9 @@ import Header from "./mycomponents/header.js";
 import Todos from "./mycomponents/todos.js";
 import Addtodo from "./mycomponents/addtodo.js";
 import Footer from "./mycomponents/footer.js";
+import About from "./mycomponents/About.js";
 import React, { useState, useEffect } from "react";
-
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 function App() {
   let initTodo;
   if (localStorage.getItem("todo") === null) {
@@ -26,15 +27,14 @@ function App() {
     console.log("I am adding this todo", title, desc);
     let sno;
     if (todos.length === 0) {
-      sno = 0;
-    }
-    else {
+      sno = 1;
+    } else {
       sno = todos[todos.length - 1].sno + 1;
     }
     const myTodo = {
       sno: sno,
       title: title,
-      desc: desc
+      desc: desc,
     };
     setTodo([...todos, myTodo]);
     console.log(myTodo);
@@ -46,10 +46,27 @@ function App() {
   }, [todos]);
   return (
     <>
-      <Header title="My todos List" />
-      <Addtodo addTodo={addTodo} />
-      <Todos todos={todos} ondelete={ondelete} />
-      <Footer />
+      <Router>
+        <Header title="My todos List" />
+        <Routes>
+          <Route
+            exact
+            path="/"
+            render={() => {
+              return (
+                <>
+                  <Addtodo addTodo={addTodo} />
+                  <Todos todos={todos} ondelete={ondelete} />
+                </>
+              )
+            }}
+          ></Route>
+          <Route path="/about">
+            <About />
+          </Route>
+        </Routes>
+        <Footer />
+      </Router>
     </>
   );
 }
