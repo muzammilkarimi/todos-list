@@ -1,43 +1,54 @@
-import logo from './logo.svg';
-import './App.css';
-import Header from './mycomponents/header.js'
-import Todos from './mycomponents/todos.js'
-import Addtodo from './mycomponents/addtodo.js'
-import Footer from './mycomponents/footer.js'
-import React, { useState } from 'react';
+import logo from "./logo.svg";
+import "./App.css";
+import Header from "./mycomponents/header.js";
+import Todos from "./mycomponents/todos.js";
+import Addtodo from "./mycomponents/addtodo.js";
+import Footer from "./mycomponents/footer.js";
+import React, { useState, useEffect } from "react";
 
 function App() {
-  const ondelete = (comingtodo)=>{
-    console.log("i am ondelete",comingtodo);
-    setTodo(todo.filter((e)=>{
-      return e!==comingtodo;
-    }));
+  let initTodo;
+  if (localStorage.getItem("todo") === null) {
+    initTodo = [];
+  } else {
+    initTodo = JSON.parse(localStorage.getItem("todo"));
   }
-
-
-
-  const [todo, setTodo] = useState([
-    {
-      sno: 1,
-      title: "go to market",
-      disc: "i have to buy some vegi and snacks"
-    },
-    {
-      sno: 2,
-      title: "go to mall",
-      disc: "i have to buy eid clothes"
-    },
-    {
-      sno: 3,
-      title: "go to mousque",
-      disc: "i have to go for prayer"
+  const ondelete = (comingtodo) => {
+    console.log("i am ondelete", comingtodo);
+    setTodo(
+      todos.filter((e) => {
+        return e !== comingtodo;
+      })
+    );
+    localStorage.setItem("todo", JSON.stringify(todos));
+  };
+  const addTodo = (title, desc) => {
+    console.log("I am adding this todo", title, desc);
+    let sno;
+    if (todos.length === 0) {
+      sno = 0;
     }
-  ]);
+    else {
+      sno = todos[todos.length - 1].sno + 1;
+    }
+    const myTodo = {
+      sno: sno,
+      title: title,
+      desc: desc
+    };
+    setTodo([...todos, myTodo]);
+    console.log(myTodo);
+  };
+
+  const [todos, setTodo] = useState(initTodo);
+  useEffect(() => {
+    localStorage.setItem("todo", JSON.stringify(todos));
+  }, [todos]);
   return (
     <>
       <Header title="My todos List" />
-      <Addtodo/>
-      <Todos todos={todo} ondelete={ondelete}/>
+      <Addtodo addTodo={addTodo} />
+      <Todos todos={todos} ondelete={ondelete} />
       <Footer />
     </>
   );
