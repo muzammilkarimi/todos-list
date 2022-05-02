@@ -10,11 +10,12 @@ return (
     <p>{todos.sno}</p>
     <h4>{todos.title}</h4>
     <p>{todos.desc}</p>
-    <div className="align-items-center">
+    <div className="align-items-center py-3">
       <input className="htmlhtmlForm-check-input " type="checkbox" value="" id=""  />
       <label className="htmlhtmlForm-check-label ms-2 text-center" htmlFor="flexCheckDefault">Done</label>
       <button className="btn btn-sm  ms-3" style={{background:"#FF914D"}} onClick={() => { ondelete(todos) }}>Delete</button>
     </div>
+    <hr />
   </div>
 )
 }
