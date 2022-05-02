@@ -2,6 +2,11 @@ import React, { useState } from 'react';
 
 
 export default function AddTodo({ addTodo }) {
+    let mystyle = {
+        minWidth: "100px",
+        margin: "10px auto",
+        
+    }
     const [title, setTitle] = useState("");
     const [desc, setDesc] = useState("");
     const submit = (e) => {
@@ -15,7 +20,7 @@ export default function AddTodo({ addTodo }) {
 
     }
     return (
-        <div className="container">
+        <div className="container" style={mystyle}>
             <h3 className="pt-3">Add a Todo</h3>
             <form onSubmit={submit}>
                 <div className="mb-3">
@@ -42,7 +47,7 @@ export default function AddTodo({ addTodo }) {
                         className="form-control" id="desc" />
                 </div>
 
-                <button type="submit" className="btn btn-primary" style={{background:"#FF914D",border:"none",color:"black"}}>
+                <button type="submit" className="btn btn-primary" style={{background:"#FF914D",border:"none",color:"black",margin:"1rem 0 "}}>
                     Add Todo
                 </button>
             </form>

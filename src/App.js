@@ -1,4 +1,3 @@
-import logo from "./logo.svg";
 import "./App.css";
 import Header from "./mycomponents/header.js";
 import Todos from "./mycomponents/todos.js";
@@ -6,7 +5,7 @@ import Addtodo from "./mycomponents/addtodo.js";
 import Footer from "./mycomponents/footer.js";
 import About from "./mycomponents/About.js";
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 function App() {
   let initTodo;
   if (localStorage.getItem("todo") === null) {
@@ -50,20 +49,15 @@ function App() {
         <Header title="My todos List" />
         <Routes>
           <Route
-            exact
             path="/"
-            render={() => {
-              return (
-                <>
-                  <Addtodo addTodo={addTodo} />
-                  <Todos todos={todos} ondelete={ondelete} />
-                </>
-              )
-            }}
+            element={
+              <>
+                <Addtodo addTodo={addTodo} />
+                <Todos todos={todos} ondelete={ondelete} />
+              </>
+            }
           ></Route>
-          <Route path="/about">
-            <About />
-          </Route>
+          <Route path="/about" element={<About />}></Route>
         </Routes>
         <Footer />
       </Router>
